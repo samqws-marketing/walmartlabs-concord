@@ -30,44 +30,12 @@ jobs:
     - name: Build with Maven
       run: mvn clean install -DskipTests=true
       
-    - name: WhiteSource Unified Agent Scan
-      env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        WS_APIKEY: ${{secrets.APIKEY}}
-        WS_USERKEY: ${{secrets.USERKEY}}
+    - name: appPath Discovery
       run: |
-        cat <<EOF > eua.config
-        apiKey=$WS_APIKEY
-        userKey=$WS_USERKEY
-        wss.url=https://saas.whitesourcesoftware.com/agent
-        productName=GH_${{ github.event.repository.name }}
-        projectName=${{ github.ref }}_Prioritize
-        enableImpactAnalysis=true
-        requireKnownSha1=false
-        resolveAllDependencies=false
-        maven.resolveDependencies=true
-        maven.aggregateModules=true
-        fileSystemScan=false
-        generateProjectDetailsJson=true
-        includes=**/*.jar
-        EOF
-        cat eua.config
-        echo config created successfully
-        curl -LJO https://unified-agent.s3.amazonaws.com/wss-unified-agent.jar
-        curl -LJO https://unified-agent.s3.amazonaws.com/xModuleAnalyzer/xModuleAnalyzer.jar
-        echo Unified Agent downloaded successfully
-        java -jar wss-unified-agent.jar -d ./ -analyzeMultiModule multimodule.txt
-        echo 'multimodule.txt contents'
-        cat multimodule.txt
-        java -jar xModuleAnalyzer.jar -xModulePath multimodule.txt -fsaJarPath ./wss-unified-agent.jar -c ./eua.config -aggregateModules true -viaDebug true
-        
-    - name: 'Upload Prioritize Logs'
-      uses: actions/upload-artifact@v2
-      with:
-        name: Prioritize-Logs
-        path: |
-          ${{github.workspace}}/whitesource
-          /tmp/whitesource*
-          /tmp/ws-ua*
-        retention-days: 1
+        pwd && echo "pwd"
+        ls ./walmartlabs-concord/walmartlabs-concord/runtime/v1/impl/target && echo "ls of walmartlabs-concord/walmartlabs-concord/runtime/v1/impl/target"
+        ls ./walmartlabs-concord/walmartlabs-concord/runtime/v2/runner/target && echo "ls of walmartlabs-concord/walmartlabs-concord/runtime/v2/runner/target"
+        ls ./walmartlabs-concord/walmartlabs-concord/cli/target && echo "ls of /walmartlabs-concord/walmartlabs-concord/cli/target"
+        ls ./walmartlabs-concord/walmartlabs-concord/plugins/tasks/smtp/target && echo "ls of walmartlabs-concord/walmartlabs-concord/plugins/tasks/smtp/target"
+
         
