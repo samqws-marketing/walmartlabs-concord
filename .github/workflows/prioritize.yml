@@ -33,9 +33,9 @@ jobs:
     - name: appPath Discovery
       run: |
         pwd && echo "pwd"
-        ls ./walmartlabs-concord/walmartlabs-concord/runtime/v1/impl/target && echo "ls of walmartlabs-concord/walmartlabs-concord/runtime/v1/impl/target"
-        ls ./walmartlabs-concord/walmartlabs-concord/runtime/v2/runner/target && echo "ls of walmartlabs-concord/walmartlabs-concord/runtime/v2/runner/target"
-        ls ./walmartlabs-concord/walmartlabs-concord/cli/target && echo "ls of /walmartlabs-concord/walmartlabs-concord/cli/target"
-        ls ./walmartlabs-concord/walmartlabs-concord/plugins/tasks/smtp/target && echo "ls of walmartlabs-concord/walmartlabs-concord/plugins/tasks/smtp/target"
+        ls ./runtime/v1/impl/target && echo "ls of /runtime/v1/impl/target"
+        ls ./runtime/v2/runner/target && echo "ls of /runtime/v2/runner/target"
+        ls ./cli/target && echo "ls of /cli/target"
+        ls ./plugins/tasks/smtp/target && echo "ls of /plugins/tasks/smtp/target"
 
         
